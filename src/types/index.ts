@@ -13,3 +13,7 @@ export type ISurvivor = {
   infected: boolean;
   img: string;
 };
+
+export type ISurvivorsDictionary = {
+  [id: string]: ISurvivor;
+};

@@ -3,12 +3,18 @@ import { ClanBadge, Tag } from "@/components";
 
 type SurvivorCardProps = {
   survivor: ISurvivor;
+  onClick: () => void;
 };
 
 export default function SurvivorCard(props: SurvivorCardProps) {
-  const { survivor } = props;
+  const { survivor, onClick } = props;
   return (
-    <div className="max-w-sm h-128 bg-white border border-gray-200 rounded-lg hover:zombie-cursor hover:bg-green-400 hover:shadow-lg hover:scale-105">
+    <div
+      className={`max-w-sm h-128 bg-white border border-gray-200 rounded-lg hover:bg-green-400 hover:shadow-lg hover:scale-105 ${
+        survivor.infected ? "hover:heal-cursor" : "hover:zombie-cursor"
+      }`}
+      onClick={onClick}
+    >
       <div className="h-96 overflow-hidden">
         <img
           className="rounded-t-lg object-fit"

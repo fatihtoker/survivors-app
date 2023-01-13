@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { ISurvivor } from "@/types";
+import { ISurvivor, ISurvivorsDictionary } from "@/types";
 import urlJoin from "url-join";
 import { Page, SurvivorCard } from "@/components";
+import { useState } from "react";
 
 type IHomePageProps = {
-  survivors: ISurvivor[];
+  survivorsDictionary: ISurvivorsDictionary;
 };
 
 const BASE_URL = "http://localhost:3000/";
@@ -12,15 +13,30 @@ const BASE_URL = "http://localhost:3000/";
 export async function getStaticProps() {
   const survivorsUrl = urlJoin(BASE_URL, "api/survivors");
   const survivorsResponse = await fetch(survivorsUrl);
-  const survivors = await survivorsResponse.json();
+  const survivorsDictionary = await survivorsResponse.json();
 
   return {
     props: {
-      survivors,
+      survivorsDictionary,
     },
   };
 }
 export default function HomePage(props: IHomePageProps) {
+  const [
+    survivorsDictionary,
+    setSurvivorsDictionary,
+  ] = useState<ISurvivorsDictionary>(props.survivorsDictionary);
+
+  const toggleInfection = (selectedSurvivor: ISurvivor): void => {
+    setSurvivorsDictionary({
+      ...survivorsDictionary,
+      [selectedSurvivor.id]: {
+        ...selectedSurvivor,
+        infected: !selectedSurvivor.infected,
+      },
+    });
+  };
+
   return (
     <>
       <Head>
@@ -32,8 +48,13 @@ export default function HomePage(props: IHomePageProps) {
       <Page>
         <h1 className="text-center mb-8">Zombie Apocalypse Survivors 2023</h1>
         <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {props.survivors.map((survivor) => (
-            <SurvivorCard survivor={survivor} />
+          {Object.keys(survivorsDictionary).map((survivorId) => (
+            <SurvivorCard
+              survivor={survivorsDictionary[survivorId]}
+              onClick={() => {
+                toggleInfection(survivorsDictionary[survivorId]);
+              }}
+            />
           ))}
         </div>
       </Page>

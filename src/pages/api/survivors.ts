@@ -2,13 +2,19 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fsPromises from "fs/promises";
 import path from "path";
+import { ISurvivor, ISurvivorsDictionary } from "@/types";
 
 async function getSurvivors() {
   const filePath = path.join(process.cwd(), "src/pages/api/data.json");
   const jsonData = await fsPromises.readFile(filePath, "utf-8");
-  const objectData = JSON.parse(jsonData);
+  const listData = JSON.parse(jsonData);
 
-  return objectData;
+  const survivorsDictionary = listData.reduce(
+    (obj: ISurvivorsDictionary, cur: ISurvivor) => ({ ...obj, [cur.id]: cur }),
+    {}
+  );
+
+  return survivorsDictionary;
 }
 
 export default async function survivors(
