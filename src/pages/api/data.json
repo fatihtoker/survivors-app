@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "name": "Batman",
+    "clan": "Mechanic",
+    "infected": false,
+    "img": "survivor1.jpeg"
+  },
+  {
+    "id": "2",
+    "name": "Superman",
+    "clan": "Adventurer",
+    "infected": false,
+    "img": "survivor2.jpeg"
+  },
+  {
+    "id": "3",
+    "name": "Flash",
+    "clan": "Soldier",
+    "infected": false,
+    "img": "survivor3.jpeg"
+  },
+  {
+    "id": "4",
+    "name": "Green Lantern",
+    "clan": "Scientist",
+    "infected": true,
+    "img": "survivor4.jpeg"
+  },
+  {
+    "id": "5",
+    "name": "Green Arrow",
+    "clan": "Captain",
+    "infected": false,
+    "img": "survivor5.jpeg"
+  },
+  {
+    "id": "6",
+    "name": "Wolverine",
+    "clan": "Knife",
+    "infected": false,
+    "img": "survivor6.jpeg"
+  }
+]
