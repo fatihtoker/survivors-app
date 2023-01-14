@@ -57,7 +57,7 @@ export default function HomePage(props: IHomePageProps) {
         <SearchBar onChange={handleSearchChange} searchText={searchText} />
         <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {Object.keys(survivorsDictionary).map((survivorId) => (
-            <Link key={survivor.id} href={`/survivor/${survivor.id}`}><SurvivorCard
+            <Link key={survivorId} href={`/survivor/${survivorId}`}><SurvivorCard
               survivor={survivorsDictionary[survivorId]}
               onClick={() => {
                 toggleInfection(survivorsDictionary[survivorId]);
