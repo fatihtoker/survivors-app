@@ -17,6 +17,16 @@ async function getSurvivors() {
   return survivorsDictionary;
 }
 
+export async function getSurvivorById(id: any) {
+  return {
+    id: "1",
+    name: "Batman",
+    clan: "Mechanic",
+    infected: false,
+    img: "survivor1.jpeg",
+  };
+}
+
 export default async function survivors(
   req: NextApiRequest,
   res: NextApiResponse

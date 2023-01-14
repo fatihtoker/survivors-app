@@ -4,12 +4,13 @@ import urlJoin from "url-join";
 import { Page, SurvivorCard } from "@/components";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
+import Link from "next/link";
 
 type IHomePageProps = {
   survivorsDictionary: ISurvivorsDictionary;
 };
 
-const BASE_URL = "http://localhost:3000/";
+export const BASE_URL = "http://localhost:3000/";
 
 export async function getStaticProps() {
   const survivorsUrl = urlJoin(BASE_URL, "api/survivors");
@@ -56,12 +57,13 @@ export default function HomePage(props: IHomePageProps) {
         <SearchBar onChange={handleSearchChange} searchText={searchText} />
         <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {Object.keys(survivorsDictionary).map((survivorId) => (
-            <SurvivorCard
+            <Link key={survivor.id} href={`/survivor/${survivor.id}`}><SurvivorCard
               survivor={survivorsDictionary[survivorId]}
               onClick={() => {
                 toggleInfection(survivorsDictionary[survivorId]);
               }}
-            />
+            /></Link>
+        
           ))}
         </div>
       </Page>
