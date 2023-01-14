@@ -2,7 +2,7 @@ import Head from "next/head";
 import { ISurvivor, ISurvivorsDictionary } from "@/types";
 import urlJoin from "url-join";
 import { Page, SurvivorCard } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "@/components/SearchBar";
 
 type IHomePageProps = {
@@ -29,6 +29,17 @@ export default function HomePage(props: IHomePageProps) {
     setSurvivorsDictionary,
   ] = useState<ISurvivorsDictionary>(props.survivorsDictionary);
   const [searchText, setSearchText] = useState<string>("");
+  const [searchedSurvivorIds, setSearchedSurvivorIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    setSearchedSurvivorIds(
+      Object.keys(survivorsDictionary).filter((key) =>
+        survivorsDictionary[key].name
+          .toLowerCase()
+          .startsWith(searchText.toLowerCase())
+      )
+    );
+  }, [searchText]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -65,14 +76,25 @@ export default function HomePage(props: IHomePageProps) {
         <h1 className="text-center mb-8">Zombie Apocalypse Survivors 2023</h1>
         <SearchBar onChange={handleSearchChange} searchText={searchText} />
         <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {Object.keys(survivorsDictionary).map((survivorId) => (
-            <SurvivorCard
-              survivor={survivorsDictionary[survivorId]}
-              toggleInfection={() => {
-                toggleInfection(survivorsDictionary[survivorId]);
-              }}
-            />
-          ))}
+          {searchText
+            ? searchedSurvivorIds.map((survivorId) => (
+                <SurvivorCard
+                  key={survivorId}
+                  survivor={survivorsDictionary[survivorId]}
+                  toggleInfection={() => {
+                    toggleInfection(survivorsDictionary[survivorId]);
+                  }}
+                />
+              ))
+            : Object.keys(survivorsDictionary).map((survivorId) => (
+                <SurvivorCard
+                  key={survivorId}
+                  survivor={survivorsDictionary[survivorId]}
+                  toggleInfection={() => {
+                    toggleInfection(survivorsDictionary[survivorId]);
+                  }}
+                />
+              ))}
         </div>
       </Page>
     </>
