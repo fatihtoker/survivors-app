@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import { ISurvivor } from "@/types";
-import { Page, SurvivorCard } from "@/components";
+import { Page, SurvivorCard, BattleItem } from "@/components";
 import { BASE_URL } from "..";
 import urlJoin from "url-join";
 import Link from "next/link";
+import { useState } from "react";
 
 interface ISurvivorProps {
   survivor: ISurvivor;
@@ -12,7 +13,23 @@ interface ISurvivorProps {
 }
 export default function Survivor(props: ISurvivorProps) {
   const { survivor, notFound } = props;
+  const [survivorState, setSurvivorState] = useState<ISurvivor>(survivor);
   const router = useRouter();
+
+  const toggleInfection = async (
+    selectedSurvivor: ISurvivor
+  ): Promise<void> => {
+    const toggleInfectionUrl = urlJoin(BASE_URL, "api/toggleInfection");
+    const survivorResponse = await fetch(toggleInfectionUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedSurvivor),
+    });
+    const updatedSurvivor = await survivorResponse.json();
+    setSurvivorState(updatedSurvivor);
+  };
 
   if (!router.isFallback && notFound) {
     return <ErrorPage statusCode={404} />;
@@ -20,7 +37,7 @@ export default function Survivor(props: ISurvivorProps) {
 
   return (
     <Page>
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center">
         <div className="absolute left-0 p-16">
           <div className="flex justify-center">
             <Link href="/">
@@ -30,7 +47,19 @@ export default function Survivor(props: ISurvivorProps) {
             </Link>
           </div>
         </div>
-        <SurvivorCard survivor={survivor} />
+        <SurvivorCard
+          survivor={survivorState}
+          hover={false}
+          toggleInfection={() => {
+            toggleInfection(survivorState);
+          }}
+        />
+
+        <ul className="bg-white rounded-lg w-96 text-gray-900 mt-8">
+          {survivorState.battles.map((battle, index) => (
+            <BattleItem key={index} battle={battle} />
+          ))}
+        </ul>
       </div>
     </Page>
   );

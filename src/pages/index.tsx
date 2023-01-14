@@ -1,9 +1,8 @@
 import Head from "next/head";
 import { ISurvivor, ISurvivorsDictionary } from "@/types";
 import urlJoin from "url-join";
-import { Page, SurvivorCard } from "@/components";
+import { Page, SurvivorCard, SearchBar } from "@/components";
 import { useEffect, useState } from "react";
-import SearchBar from "@/components/SearchBar";
 
 type IHomePageProps = {
   survivorsDictionary: ISurvivorsDictionary;

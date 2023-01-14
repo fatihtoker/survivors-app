@@ -12,8 +12,14 @@ export type ISurvivor = {
   clan: IClan;
   infected: boolean;
   img: string;
+  battles: IBattle[];
 };
 
 export type ISurvivorsDictionary = {
   [id: string]: ISurvivor;
+};
+
+export type IBattle = {
+  name: string;
+  kill: number;
 };
