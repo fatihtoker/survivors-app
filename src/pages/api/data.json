@@ -1,1 +1,86 @@
-{"1":{"id":"1","name":"Batman","clan":"Mechanic","infected":false,"img":"survivor1.jpeg"},"2":{"id":"2","name":"Superman","clan":"Adventurer","infected":true,"img":"survivor2.jpeg"},"3":{"id":"3","name":"Flash","clan":"Soldier","infected":true,"img":"survivor3.jpeg"},"4":{"id":"4","name":"Green Lantern","clan":"Scientist","infected":false,"img":"survivor4.jpeg"},"5":{"id":"5","name":"Green Arrow","clan":"Captain","infected":true,"img":"survivor5.jpeg"},"6":{"id":"6","name":"Wolverine","clan":"Knife","infected":true,"img":"survivor6.jpeg"}}
+{
+  "1": {
+    "id": "1",
+    "name": "Batman",
+    "clan": "Mechanic",
+    "infected": false,
+    "img": "survivor1.jpeg",
+    "battles": [
+      { "name": "Battle 1", "kill": 299 },
+      { "name": "Battle 2", "kill": 124 },
+      { "name": "Battle 3", "kill": 470 },
+      { "name": "Battle 4", "kill": 807 },
+      { "name": "Battle 5", "kill": 735 }
+    ]
+  },
+  "2": {
+    "id": "2",
+    "name": "Superman",
+    "clan": "Adventurer",
+    "infected": true,
+    "img": "survivor2.jpeg",
+    "battles": [
+      { "name": "Battle 1", "kill": 12 },
+      { "name": "Battle 2", "kill": 234 },
+      { "name": "Battle 3", "kill": 42 },
+      { "name": "Battle 4", "kill": 624 },
+      { "name": "Battle 5", "kill": 853 }
+    ]
+  },
+  "3": {
+    "id": "3",
+    "name": "Flash",
+    "clan": "Soldier",
+    "infected": true,
+    "img": "survivor3.jpeg",
+    "battles": [
+      { "name": "Battle 1", "kill": 1200 },
+      { "name": "Battle 2", "kill": 1400 },
+      { "name": "Battle 3", "kill": 1500 },
+      { "name": "Battle 4", "kill": 1004 },
+      { "name": "Battle 5", "kill": 1905 }
+    ]
+  },
+  "4": {
+    "id": "4",
+    "name": "Green Lantern",
+    "clan": "Scientist",
+    "infected": false,
+    "img": "survivor4.jpeg",
+    "battles": [
+      { "name": "Battle 1", "kill": 2900 },
+      { "name": "Battle 2", "kill": 400 },
+      { "name": "Battle 3", "kill": 5030 },
+      { "name": "Battle 4", "kill": 219 },
+      { "name": "Battle 5", "kill": 593 }
+    ]
+  },
+  "5": {
+    "id": "5",
+    "name": "Green Arrow",
+    "clan": "Captain",
+    "infected": true,
+    "img": "survivor5.jpeg",
+    "battles": [
+      { "name": "Battle 1", "kill": 299 },
+      { "name": "Battle 2", "kill": 124 },
+      { "name": "Battle 3", "kill": 470 },
+      { "name": "Battle 4", "kill": 807 },
+      { "name": "Battle 5", "kill": 735 }
+    ]
+  },
+  "6": {
+    "id": "6",
+    "name": "Wolverine",
+    "clan": "Knife",
+    "infected": true,
+    "img": "survivor6.jpeg",
+    "battles": [
+      { "name": "Battle 1", "kill": 299 },
+      { "name": "Battle 2", "kill": 124 },
+      { "name": "Battle 3", "kill": 470 },
+      { "name": "Battle 4", "kill": 807 },
+      { "name": "Battle 5", "kill": 735 }
+    ]
+  }
+}
