@@ -4,7 +4,6 @@ import urlJoin from "url-join";
 import { Page, SurvivorCard } from "@/components";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
-import Link from "next/link";
 
 type IHomePageProps = {
   survivorsDictionary: ISurvivorsDictionary;
@@ -23,6 +22,7 @@ export async function getStaticProps() {
     },
   };
 }
+
 export default function HomePage(props: IHomePageProps) {
   const [
     survivorsDictionary,
@@ -34,13 +34,22 @@ export default function HomePage(props: IHomePageProps) {
     setSearchText(e.target.value);
   };
 
-  const toggleInfection = (selectedSurvivor: ISurvivor): void => {
+  const toggleInfection = async (
+    selectedSurvivor: ISurvivor
+  ): Promise<void> => {
+    const toggleInfectionUrl = urlJoin(BASE_URL, "api/toggleInfection");
+    const survivorResponse = await fetch(toggleInfectionUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedSurvivor),
+    });
+    const updatedSurvivor = await survivorResponse.json();
+
     setSurvivorsDictionary({
       ...survivorsDictionary,
-      [selectedSurvivor.id]: {
-        ...selectedSurvivor,
-        infected: !selectedSurvivor.infected,
-      },
+      [updatedSurvivor.id]: updatedSurvivor,
     });
   };
 
@@ -57,13 +66,12 @@ export default function HomePage(props: IHomePageProps) {
         <SearchBar onChange={handleSearchChange} searchText={searchText} />
         <div className="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {Object.keys(survivorsDictionary).map((survivorId) => (
-            <Link key={survivorId} href={`/survivor/${survivorId}`}><SurvivorCard
+            <SurvivorCard
               survivor={survivorsDictionary[survivorId]}
-              onClick={() => {
+              toggleInfection={() => {
                 toggleInfection(survivorsDictionary[survivorId]);
               }}
-            /></Link>
-        
+            />
           ))}
         </div>
       </Page>

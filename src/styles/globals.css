@@ -41,13 +41,7 @@
   }
   /* #endregion  /**======== Typography =========== */
 
-
-
-  .zombie-cursor {
-    cursor: url('/zombie-hand.png') 10 10, pointer;
-  }
-
-  .heal-cursor {
-    cursor: url('/heal-potion.png') 10 10, pointer;
+  * {
+    cursor: url("/zombie-hand.png") 10 10, pointer;
   }
 }
