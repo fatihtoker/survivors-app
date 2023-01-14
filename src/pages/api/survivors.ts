@@ -18,6 +18,7 @@ async function getSurvivors() {
 }
 
 export async function getSurvivorById(id: any) {
+  // TODO find from array
   return {
     id: "1",
     name: "Batman",
