@@ -16,8 +16,11 @@ export default async function survivor(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.query.id)
   const survivor = await getSurvivorById(req.query.id as string);
+
+  if (!survivor) {
+    res.status(404).json(false);
+  }
 
   res.status(200).json(survivor);
 }
